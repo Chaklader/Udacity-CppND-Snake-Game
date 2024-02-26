@@ -35,12 +35,12 @@ void Auto_snake::Update(const Snake &other) {
     /*snake and auto_snake body has record in Snake::grid by function UpdateBody
      */
     std::vector<std::vector<Direction>> direction_arr(
-        height, std::vector<Direction>(width, unknown));
+        height, std::vector<Direction>(width, UNKNOWN));
     bool path_set = false;
     path_set = path_search(direction_arr, _food, current_cell, width, height);
     direction = direction_arr[current_cell.x][current_cell.y];
 
-    if (direction != unknown) {
+    if (direction != UNKNOWN) {
       _last_direction_state = direction;
     }
     /*

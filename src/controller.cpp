@@ -1,4 +1,7 @@
 #include "controller.h"
+
+#include <iostream>
+
 #include "SDL.h"
 #include "snake.h"
 
@@ -19,26 +22,32 @@ void Controller::HandleInput(bool& running, Snake& snake)
         }
         else if (e.type == SDL_KEYDOWN)
         {
-            switch (e.key.keysym.sym)
+            Sint32 sdl_keycode = e.key.keysym.sym;
+
+            switch (sdl_keycode)
             {
             case SDLK_UP:
-                ChangeDirection(snake, Snake::Direction::kUp,
-                                Snake::Direction::kDown);
+                ChangeDirection(snake, Snake::Direction::UP,
+                                Snake::Direction::DOWN);
                 break;
 
             case SDLK_DOWN:
-                ChangeDirection(snake, Snake::Direction::kDown,
-                                Snake::Direction::kUp);
+                ChangeDirection(snake, Snake::Direction::DOWN,
+                                Snake::Direction::UP);
                 break;
 
             case SDLK_LEFT:
-                ChangeDirection(snake, Snake::Direction::kLeft,
-                                Snake::Direction::kRight);
+                ChangeDirection(snake, Snake::Direction::LEFT,
+                                Snake::Direction::RIGHT);
                 break;
 
             case SDLK_RIGHT:
-                ChangeDirection(snake, Snake::Direction::kRight,
-                                Snake::Direction::kLeft);
+                ChangeDirection(snake, Snake::Direction::RIGHT,
+                                Snake::Direction::LEFT);
+                break;
+
+            default:
+                std::cout << "This case is not intended" << "\n";
                 break;
             }
         }

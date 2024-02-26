@@ -77,22 +77,22 @@ void Snake::UpdateHead()
 {
     switch (direction)
     {
-    case Direction::kUp:
+    case UP:
         head_y -= speed;
         break;
 
-    case Direction::kDown:
+    case DOWN:
         head_y += speed;
         break;
 
-    case Direction::kLeft:
+    case LEFT:
         head_x -= speed;
         break;
 
-    case Direction::kRight:
+    case RIGHT:
         head_x += speed;
         break;
-    case Direction::unknown:
+    case UNKNOWN:
         break;
     }
     /* limit snake active range, once snake head is beyond range, set alive to false
@@ -117,14 +117,12 @@ bool Snake::SnakeCell(const int& x, const int& y)
     {
         return true;
     }
-    for (auto const& item : body)
+    bool exists = std::any_of(body.begin(), body.end(), [x, y](auto const& item)
     {
-        if (x == item.x && y == item.y)
-        {
-            return true;
-        }
-    }
-    return false;
+        return x == item.x && y == item.y;
+    });
+
+    return exists;
 }
 
 bool Snake::GetFood(SDL_Point food)

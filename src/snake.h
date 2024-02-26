@@ -8,21 +8,18 @@
 class Snake
 {
 public:
-    Snake(const int& grid_width, const int& grid_height, int&& num)
+    Snake(const int& grid_width, const int& grid_height, int num)
         : grid_width(grid_width), grid_height(grid_height),
-          head_y(grid_height * 0.75f)
+          head_y(static_cast<float>(grid_height) * 0.75f)
     {
-        if (num == 0)
-            head_x = grid_width * 0.25;
-        else
-            head_x = grid_width * 0.75;
-
+        double factor = (num == 0) ? 0.25 : 0.75;
+        head_x = grid_width * factor;
         speed = 0.15f;
     }
 
-    enum Direction { kUp, kDown, kLeft, kRight, unknown };
+    enum Direction { UP, DOWN, LEFT, RIGHT, UNKNOWN };
 
-    Direction direction = kUp;
+    Direction direction = UP;
     std::deque<SDL_Point> body;
 
     float speed{0.0f};
@@ -39,7 +36,7 @@ public:
     void GrowBody();
     bool SnakeCell(const int& x, const int& y);
     bool GetFood(SDL_Point food);
-    int get_score() const { return score; }
+    [[nodiscard]] int get_score() const { return score; }
 
 protected:
     int score{0};
