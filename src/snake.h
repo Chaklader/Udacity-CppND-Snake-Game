@@ -19,7 +19,14 @@ public:
 
     virtual ~Snake() = default;
 
-    enum Direction { MOVE_UP, MOVE_DOWN, MOVE_LEFT, MOVE_RIGHT, UNKNOWN_MOVE };
+    enum Direction
+    {
+        MOVE_UP,
+        MOVE_DOWN,
+        MOVE_LEFT,
+        MOVE_RIGHT,
+        UNKNOWN_MOVE
+    };
 
     Direction direction = MOVE_UP;
     std::deque<SDL_Point> body;

@@ -12,14 +12,14 @@ void Snake::Update(const Snake& other)
     SDL_Point prev_cell{
         static_cast<int>(head_x),
         static_cast<int>(head_y)
-    }; // We first capture the head's cell before updating.
+    };
     UpdateHead();
     SDL_Point current_cell{
         static_cast<int>(head_x),
         static_cast<int>(head_y)
-    }; // Capture the head's cell after updating.
+    };
 
-    // Update all of the body vector items if the snake head has moved to a new cell
+
     moved = false;
     if (current_cell.x != prev_cell.x || current_cell.y != prev_cell.y)
     {
@@ -30,43 +30,32 @@ void Snake::Update(const Snake& other)
 
 void Snake::UpdateBody(const SDL_Point* current_head_cell, SDL_Point& prev_head_cell, const Snake& other)
 {
-    // Add previous head location to vector
     body.push_back(prev_head_cell);
-    /*
-       a unique_lock set here to prevent data race to static member Snake::grid
-    */
+
     std::unique_lock<std::mutex> lock_obj(mutlock);
-    Snake::grid[prev_head_cell.x][prev_head_cell.y] = true; /*add snake body into grid */
+    grid[prev_head_cell.x][prev_head_cell.y] = true;
     lock_obj.unlock();
 
-    if (!growing)
-    {
-        // Remove the tail from the vector.
-        lock_obj.lock();
-        Snake::grid[body[0].x][body[0].y] = false;
-        lock_obj.unlock();
-        body.pop_front();
-    }
-    else
+    if (growing)
     {
         growing = false;
         size++;
     }
-    // Check if the snake has died.
-    /* add this condition to make sure while auto_snake reaching food and building new path, shall not enter here
-     * because update_path is true in auto_snake.cpp: Auto_snake::Update(const Snake &other)
-     */
+    else
+    {
+        lock_obj.lock();
+        grid[body[0].x][body[0].y] = false;
+        lock_obj.unlock();
+
+        body.pop_front();
+    }
+
     if (current_head_cell->x != prev_head_cell.x || current_head_cell->y != prev_head_cell.y)
     {
-        for (auto const& item : body)
+        if (std::any_of(body.begin(), body.end(), [current_head_cell](const SDL_Point& point)
         {
-            if (current_head_cell->x == item.x && current_head_cell->y == item.y)
-            {
-                alive = false;
-            }
-        }
-
-        if (SnakeCell(other.head_x, other.head_y) == true)
+            return point.x == current_head_cell->x && point.y == current_head_cell->y;
+        }) || SnakeCell(other.head_x, other.head_y))
         {
             alive = false;
         }
