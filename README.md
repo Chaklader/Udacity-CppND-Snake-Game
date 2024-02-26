@@ -34,6 +34,17 @@ In this project, you can build your own C++ application or extend this Snake gam
   - std::unique_lock used in snake.cpp and auto_snake.cpp
 
 
+
+IDEAS: Extending the Snake Game with NEW features
+––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+- Allow players to enter their names and save their high scores to a text file.
+- Add fixed and moving obstacles to the game.
+- Add different types of food to the game.
+- Allow players to select the initial speed of the game.
+- Add another snake to the game that is controlled by the computer using the A* search algorithm.
+
+
 ## Dependencies for Running Locally
 * cmake >= 3.7
   * All OSes: [click here for installation instructions](https://cmake.org/install/)
