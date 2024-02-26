@@ -10,29 +10,28 @@ In this project, you can build your own C++ application or extend this Snake gam
 
 
 **Rubric Criteria**
-–––––––––––––––––––
 
 - The project demonstrates proficiency with C++ functions, control flows, and fundamental syntax.
 - The project incorporates Object Oriented Programming techniques and design principles.
 - Classes appropriately leverage access modifiers on members:
-      - Public and protected members in the Snake base class (snake.h)
-      - Public and private members in the derived AutoSnake class (auto_snake.h)
+  - Public and protected members in the Snake base class (snake.h)
+  - Public and private members in the derived AutoSnake class (auto_snake.h)
 - Constructor initialization lists are utilized to initialize class data members:
-      - In Game constructor (game.cpp)
-      - In both Snake and AutoSnake constructors (snake.h, auto_snake.h)
+  - In Game constructor (game.cpp)
+  - In both Snake and AutoSnake constructors (snake.h, auto_snake.h)
 - Classes hide implementation details in the .cpp file and expose clean interfaces in the header.
 - Classes exhibit encapsulation by bundling relevant data and behaviors.
 - An inheritance hierarchy is implemented with derived subclasses inheriting base class functionality:
-      - AutoSnake inherits from Snake
-      - Composition relationship with Game class
+  - AutoSnake inherits from Snake
+  - Composition relationship with Game class
 - Derived classes override key virtual functions from the base class:
-      - Virtual functions defined in Snake (snake.h)
-      - Overridden in AutoSnake (auto_snake.h)
+  - Virtual functions defined in Snake (snake.h)
+  - Overridden in AutoSnake (auto_snake.h)
 - References are used appropriately in function declarations to avoid unnecessary copying.
 - Move semantics are leveraged where applicable to avoid copies (auto_snake.h)
 - Multithreading is incorporated in the project structure (game.cpp).
 - Mutexes or locks safely handle concurrent access of shared data:
-      - std::unique_lock used in snake.cpp and auto_snake.cpp
+  - std::unique_lock used in snake.cpp and auto_snake.cpp
 
 
 ## Dependencies for Running Locally
