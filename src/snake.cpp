@@ -84,12 +84,11 @@ void Snake::UpdateHead()
     case UNKNOWN_MOVE:
         break;
     }
-    /* limit snake active range, once snake head is beyond range, set alive to false
-       when x or y greater than 32.0, set it to 31.. for rendering */
 
     if (head_x < 0.0f || head_y < 0.0f || head_x >= 32.0f || head_y >= 32.0f)
     {
         alive = false;
+
         if (head_x >= 32.0f)
             head_x = 31.99;
         else if (head_y >= 32.0f)
@@ -97,21 +96,21 @@ void Snake::UpdateHead()
     }
 }
 
-void Snake::GrowBody() { growing = true; }
+void Snake::GrowBody()
+{
+    growing = true;
+}
 
-// Inefficient method to check if cell is occupied by snake.
 bool Snake::SnakeCell(const int& x, const int& y)
 {
     if (x == static_cast<int>(head_x) && y == static_cast<int>(head_y))
     {
         return true;
     }
-    bool exists = std::any_of(body.begin(), body.end(), [x, y](auto const& item)
+    return std::any_of(body.begin(), body.end(), [x, y](auto const& item)
     {
         return x == item.x && y == item.y;
     });
-
-    return exists;
 }
 
 bool Snake::GetFood(SDL_Point food)
@@ -123,7 +122,6 @@ bool Snake::GetFood(SDL_Point food)
     if (food.x == new_x && food.y == new_y)
     {
         get_food = true;
-        // Grow snake and increase speed.
         score++;
         GrowBody();
     }
