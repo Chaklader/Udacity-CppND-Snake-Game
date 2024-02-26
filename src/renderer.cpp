@@ -95,18 +95,16 @@ void Renderer::RenderSnakeBody(const std::deque<SDL_Point>& body, const SDL_Colo
 void Renderer::RenderSnakeHead(float head_x, float head_y, bool alive, const SDL_Color& aliveColor)
 {
     SDL_Rect block;
+
     block.w = screen_width / grid_width;
     block.h = screen_height / grid_height;
     block.x = static_cast<int>(head_x) * block.w;
     block.y = static_cast<int>(head_y) * block.h;
 
-    if (alive)
-    {
-        SDL_SetRenderDrawColor(sdl_renderer, aliveColor.r, aliveColor.g, aliveColor.b, aliveColor.a);
-    }
-    else
-    {
-        SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF); // Red for "dead"
-    }
+    SDL_Color deadColor{0xFF, 0x00, 0x00, 0xFF};
+
+    const SDL_Color& color = alive ? aliveColor : deadColor;
+    SDL_SetRenderDrawColor(sdl_renderer, color.r, color.g, color.b, color.a);
+
     SDL_RenderFillRect(sdl_renderer, &block);
 }
