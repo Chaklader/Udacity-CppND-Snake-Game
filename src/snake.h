@@ -17,9 +17,11 @@ public:
         speed = 0.15f;
     }
 
-    enum Direction { UP, DOWN, LEFT, RIGHT, UNKNOWN };
+    virtual ~Snake() = default;
 
-    Direction direction = UP;
+    enum Direction { MOVE_UP, MOVE_DOWN, MOVE_LEFT, MOVE_RIGHT, UNKNOWN_MOVE };
+
+    Direction direction = MOVE_UP;
     std::deque<SDL_Point> body;
 
     float speed{0.0f};

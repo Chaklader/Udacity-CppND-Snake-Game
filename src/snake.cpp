@@ -36,14 +36,14 @@ void Snake::UpdateBody(const SDL_Point* current_head_cell, SDL_Point& prev_head_
        a unique_lock set here to prevent data race to static member Snake::grid
     */
     std::unique_lock<std::mutex> lock_obj(mutlock);
-    Snake::grid[prev_head_cell.x][prev_head_cell.y] = 1; /*add snake body into grid */
+    Snake::grid[prev_head_cell.x][prev_head_cell.y] = true; /*add snake body into grid */
     lock_obj.unlock();
 
     if (!growing)
     {
         // Remove the tail from the vector.
         lock_obj.lock();
-        Snake::grid[body[0].x][body[0].y] = 0;
+        Snake::grid[body[0].x][body[0].y] = false;
         lock_obj.unlock();
         body.pop_front();
     }
@@ -77,22 +77,22 @@ void Snake::UpdateHead()
 {
     switch (direction)
     {
-    case UP:
+    case MOVE_UP:
         head_y -= speed;
         break;
 
-    case DOWN:
+    case MOVE_DOWN:
         head_y += speed;
         break;
 
-    case LEFT:
+    case MOVE_LEFT:
         head_x -= speed;
         break;
 
-    case RIGHT:
+    case MOVE_RIGHT:
         head_x += speed;
         break;
-    case UNKNOWN:
+    case UNKNOWN_MOVE:
         break;
     }
     /* limit snake active range, once snake head is beyond range, set alive to false

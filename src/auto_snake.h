@@ -24,7 +24,7 @@ public:
 private:
     bool update_path{false};
     SDL_Point _food{0, 0};
-    Direction _last_direction_state{UNKNOWN};
+    Direction _last_direction_state{UNKNOWN_MOVE};
 
     struct Delta
     {
@@ -48,7 +48,7 @@ private:
         int y;
         int cost{0};
         bool visited{false};
-        Direction action{UNKNOWN};
+        Direction action{UNKNOWN_MOVE};
         SDL_Point parent{-1, -1};
         /* member function */
         bool operator<(Search_Pt const& a) const
@@ -60,7 +60,7 @@ private:
     bool path_search(std::vector<std::vector<Direction>>& direction_arr, const SDL_Point& food, const SDL_Point& head,
                      int&& grid_width, int&& grid_height);
 
-    std::vector<Delta> delta_list = {{0, -1, UP}, {0, 1, DOWN}, {-1, 0, LEFT}, {1, 0, RIGHT}};
+    std::vector<Delta> delta_list = {{0, -1, MOVE_UP}, {0, 1, MOVE_DOWN}, {-1, 0, MOVE_LEFT}, {1, 0, MOVE_RIGHT}};
     /*move: up, down, left, right */
 };
 

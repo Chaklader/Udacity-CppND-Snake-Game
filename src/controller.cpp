@@ -27,23 +27,23 @@ void Controller::HandleInput(bool& running, Snake& snake)
             switch (sdl_keycode)
             {
             case SDLK_UP:
-                ChangeDirection(snake, Snake::Direction::UP,
-                                Snake::Direction::DOWN);
+                ChangeDirection(snake, Snake::Direction::MOVE_UP,
+                                Snake::Direction::MOVE_DOWN);
                 break;
 
             case SDLK_DOWN:
-                ChangeDirection(snake, Snake::Direction::DOWN,
-                                Snake::Direction::UP);
+                ChangeDirection(snake, Snake::Direction::MOVE_DOWN,
+                                Snake::Direction::MOVE_UP);
                 break;
 
             case SDLK_LEFT:
-                ChangeDirection(snake, Snake::Direction::LEFT,
-                                Snake::Direction::RIGHT);
+                ChangeDirection(snake, Snake::Direction::MOVE_DOWN,
+                                Snake::Direction::MOVE_RIGHT);
                 break;
 
             case SDLK_RIGHT:
-                ChangeDirection(snake, Snake::Direction::RIGHT,
-                                Snake::Direction::LEFT);
+                ChangeDirection(snake, Snake::Direction::MOVE_RIGHT,
+                                Snake::Direction::MOVE_DOWN);
                 break;
 
             default:
