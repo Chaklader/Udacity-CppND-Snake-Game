@@ -1,6 +1,7 @@
 #include "snake.h"
 #include "game.h"
 #include <iostream>
+#include <algorithm>
 #include "calibration.h"
 
 extern std::mutex mutlock;
