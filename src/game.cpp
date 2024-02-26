@@ -29,7 +29,7 @@ void Game::Run(Controller const& controller, Renderer& renderer, const std::size
         frame_start = SDL_GetTicks();
 
         // Input, Update, Render - the main game loop.
-        controller.HandleInput(running, snake);
+        Controller::HandleInput(running, snake);
 
         Update();
 
