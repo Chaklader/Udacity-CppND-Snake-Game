@@ -3,13 +3,13 @@
 
 #include "snake.h"
 
-class Controller {
+class Controller
+{
 public:
-  void HandleInput(bool &running, Snake &snake) const;
+    static void HandleInput(bool& running, Snake& snake) ;
 
- private:
-  void ChangeDirection(Snake &snake, Snake::Direction input, Snake::Direction opposite) const;
-
+private:
+    static void ChangeDirection(Snake& snake, Snake::Direction input, Snake::Direction opposite) ;
 };
 
 #endif
