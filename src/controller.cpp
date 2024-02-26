@@ -37,13 +37,13 @@ void Controller::HandleInput(bool& running, Snake& snake)
                 break;
 
             case SDLK_LEFT:
-                ChangeDirection(snake, Snake::Direction::MOVE_DOWN,
+                ChangeDirection(snake, Snake::Direction::MOVE_LEFT,
                                 Snake::Direction::MOVE_RIGHT);
                 break;
 
             case SDLK_RIGHT:
                 ChangeDirection(snake, Snake::Direction::MOVE_RIGHT,
-                                Snake::Direction::MOVE_DOWN);
+                                Snake::Direction::MOVE_LEFT);
                 break;
 
             default:
