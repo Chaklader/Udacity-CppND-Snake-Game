@@ -8,7 +8,7 @@
 #include "snake.h"
 #include "auto_snake.h"
 #include <thread>
-#include <future>
+
 
 class Game
 {
