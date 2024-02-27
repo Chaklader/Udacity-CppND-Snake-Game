@@ -1,5 +1,7 @@
 #include "auto_snake.h"
 #include "calibration.h"
+#include <mutex>
+#include <algorithm>
 
 extern std::mutex mutlock;
 
