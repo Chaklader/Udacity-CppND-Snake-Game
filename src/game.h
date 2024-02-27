@@ -8,6 +8,7 @@
 #include "snake.h"
 #include "auto_snake.h"
 #include <thread>
+#include <mutex>
 
 
 class Game
